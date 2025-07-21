@@ -8,38 +8,39 @@ local colors = {
 	cyan = "#6ae9f0",
 	dark_blue = "#0e293f",
 	light_blue = "#5f7e97",
+	none = "NONE",
 }
 
 local night_owl = {
 	normal = {
-		a = { bg = colors.magenta, fg = colors.dark, gui = "bold" },
-		b = { bg = colors.dark, fg = colors.light },
-		c = { bg = colors.dark, fg = colors.light },
+		a = { bg = colors.none, fg = colors.magenta, gui = "bold" },
+		b = { bg = colors.none, fg = colors.light },
+		c = { bg = colors.none, fg = colors.light },
 	},
 	insert = {
-		a = { bg = colors.green, fg = colors.dark, gui = "bold" },
-		b = { bg = colors.dark, fg = colors.light },
-		c = { bg = colors.dark, fg = colors.light },
+		a = { bg = colors.none, fg = colors.green, gui = "bold" },
+		b = { bg = colors.none, fg = colors.light },
+		c = { bg = colors.none, fg = colors.light },
 	},
 	visual = {
-		a = { bg = colors.yellow, fg = colors.dark, gui = "bold" },
-		b = { bg = colors.dark, fg = colors.light },
-		c = { bg = colors.dark, fg = colors.light },
+		a = { bg = colors.none, fg = colors.yellow, gui = "bold" },
+		b = { bg = colors.none, fg = colors.light },
+		c = { bg = colors.none, fg = colors.light },
 	},
 	replace = {
-		a = { bg = colors.orange, fg = colors.dark, gui = "bold" },
-		b = { bg = colors.dark, fg = colors.light },
-		c = { bg = colors.dark, fg = colors.light },
+		a = { bg = colors.none, fg = colors.orange, gui = "bold" },
+		b = { bg = colors.none, fg = colors.light },
+		c = { bg = colors.none, fg = colors.light },
 	},
 	command = {
-		a = { bg = colors.cyan, fg = colors.dark, gui = "bold" },
-		b = { bg = colors.dark, fg = colors.light },
-		c = { bg = colors.dark, fg = colors.light },
+		a = { bg = colors.none, fg = colors.cyan, gui = "bold" },
+		b = { bg = colors.none, fg = colors.light },
+		c = { bg = colors.none, fg = colors.light },
 	},
 	inactive = {
-		a = { bg = colors.dark_blue, fg = colors.light_blue, gui = "bold" },
-		b = { bg = colors.dark_blue, fg = colors.light_blue },
-		c = { bg = colors.dark_blue, fg = colors.light_blue },
+		a = { bg = colors.none, fg = colors.light_blue, gui = "bold" },
+		b = { bg = colors.none, fg = colors.light_blue },
+		c = { bg = colors.none, fg = colors.light_blue },
 	},
 }
 

@@ -2,8 +2,8 @@ local colors = {
 	fg = "#d6deeb",
 	bg = "#021727",
 	folded_bg = "#092135",
-	cursor_fg = "#805a3e",
-	cursor_bg = "#80a4c2",
+	cursor_fg = "#d6deeb",
+	cursor_bg = "#d6deeb",
 	line_number_fg = "#4b6479",
 	line_number_active_fg = "#c5e4fc",
 	sign_add = "#9ccc65",
@@ -41,6 +41,7 @@ local colors = {
 	gray4 = "#d6deeb80",
 	gray5 = "#969696",
 	gray6 = "#7e97ac",
+	gray7 = "#082236",
 	light_blue = "#78ccf0",
 	blue = "#82aaff",
 	blue2 = "#0b253a",
@@ -93,6 +94,7 @@ local colors = {
 	magenta4 = "#ff2c83",
 	magenta5 = "#e2a2f433",
 	magenta6 = "#f6bbe533",
+	none = "NONE",
 }
 
 return colors
