@@ -87,12 +87,49 @@ local night_owl = require("night-owl")
 --@param options Config|nil
 night_owl.setup({
     -- These are the default settings
+    background = "dark", -- "dark", "light" or "auto"
     bold = true,
     italics = true,
     underline = true,
     undercurl = true,
-    transparent_background = false,
+    transparent = false,
 })
+```
+
+### Light Theme
+
+Night Owl now includes a light theme variant! You can enable it in two ways:
+
+1. **Using setup configuration:**
+```lua
+require("night-owl").setup({
+    background = "light",
+    -- other options...
+})
+vim.cmd.colorscheme("night-owl")
+```
+
+2. **Using the light colorscheme directly:**
+```lua
+vim.cmd.colorscheme("night-owl-light")
+```
+
+3. **Using auto mode to follow vim.o.background:**
+```lua
+require("night-owl").setup({
+    background = "auto", -- will use vim.o.background setting
+})
+```
+
+For lualine, use the appropriate theme:
+```lua
+require('lualine').setup {
+  options = {
+    theme = 'night-owl-light' -- for light theme
+    -- or
+    theme = 'night-owl' -- for dark theme
+  }
+}
 ```
 
 ## 🖥️ Requirements

@@ -1,19 +1,19 @@
 local colors = {
-	dark = "#010d18",
-	light = "#d6deeb",
-	magenta = "#c792ea",
-	green = "#c5e478",
-	yellow = "#e2b93d",
-	orange = "#f78c6c",
-	cyan = "#6ae9f0",
-	dark_blue = "#0e293f",
-	light_blue = "#5f7e97",
+	dark = "#fbfbfb",
+	light = "#403f53",
+	magenta = "#994CC3",
+	green = "#08916a",
+	yellow = "#e0af02",
+	orange = "#F78C6C",
+	cyan = "#0C969B",
+	dark_blue = "#f0f0f0",
+	light_blue = "#989fb1",
 	none = "NONE",
 }
 
-local night_owl = {
+local night_owl_light = {
 	normal = {
-		a = { bg = colors.none, fg = colors.light, gui = "bold" },
+		a = { bg = colors.none, fg = colors.magenta, gui = "bold" },
 		b = { bg = colors.none, fg = colors.light },
 		c = { bg = colors.none, fg = colors.light },
 	},
@@ -44,4 +44,4 @@ local night_owl = {
 	},
 }
 
-return night_owl
+return night_owl_light

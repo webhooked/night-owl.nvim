@@ -2,17 +2,18 @@ local M = {}
 
 ---@class Config
 local default_options = {
+	background = "dark", -- "dark", "light" or "auto"
 	bold = true,
 	italics = true,
 	underline = true,
 	undercurl = true,
-	transparent_background = false,
+	transparent = false,
 }
 
 ---@type Config
 M.options = default_options
 
-local function set_default_settings()
+local function set_default_settings(options)
 	-- For legacy vim support (TODO: need to confirm)
 	if vim.fn.exists("syntax_on") then
 		vim.cmd("syntax reset")
@@ -20,7 +21,13 @@ local function set_default_settings()
 
 	vim.cmd("highlight clear")
 
-	vim.opt.background = "dark"
+	-- Determine background
+	local bg = options.background
+	if bg == "auto" then
+		bg = vim.o.background
+	end
+	
+	vim.opt.background = bg
 	vim.g.colors_name = "night-owl"
 	vim.opt.termguicolors = true
 end
@@ -42,8 +49,8 @@ end
 
 ---@param options Config|nil
 function M.setup(options)
-	set_default_settings()
 	M.options = handle_user_options(options)
+	set_default_settings(M.options)
 end
 
 return M

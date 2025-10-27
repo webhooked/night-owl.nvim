@@ -1,5 +1,3 @@
-local palette = require("night-owl.palette")
-
 local theme = {}
 
 local function hl(id, name, def)
@@ -7,7 +5,21 @@ local function hl(id, name, def)
 end
 
 function theme.set_highlights(options)
-	local background_color = options.transparent_background and palette.none or palette.bg
+	-- Determine background based on options
+	local bg = options.background
+	if bg == "auto" then
+		bg = vim.o.background
+	end
+	
+	-- Load appropriate palette
+	local palette
+	if bg == "light" then
+		palette = require("night-owl.palette-light")
+	else
+		palette = require("night-owl.palette")
+	end
+	
+	local background_color = options.transparent and palette.none or palette.bg
 
 	-- highlights
 	hl(0, "Normal", { fg = palette.fg, bg = background_color })
@@ -145,9 +157,9 @@ function theme.set_highlights(options)
 	hl(0, "@string.json", { fg = palette.magenta2, bg = palette.none })
 	hl(0, "@string.regex", { fg = palette.blue, bg = palette.none, nocombine = true })
 	hl(0, "@string.regexFlags", { fg = palette.blue8, bg = palette.none, nocombine = true })
-	hl(0, "@tag.attribute", { fg = palette.green, bg = palette.none, italic = options.italics })
+	hl(0, "@tag.attribute", { fg = palette.green, bg = palette.none, italic = bg == "light" and false or options.italics })
 	hl(0, "@tag.builtin", { fg = palette.light_cyan, bg = palette.none, nocombine = true })
-	hl(0, "@tag.component.jsx", { fg = palette.orange, bg = palette.none, nocombine = true })
+	hl(0, "@tag.component.jsx", { fg = bg == "light" and palette.component_tag or palette.orange, bg = palette.none, nocombine = true })
 	hl(0, "@tag.css", { fg = palette.red2, bg = palette.none, nocombine = true })
 	hl(0, "@tag.delimiter", { fg = palette.cyan2, bg = palette.none })
 	hl(0, "@text.emphasis", { fg = palette.magenta, bg = palette.none, italic = options.italics })
@@ -170,6 +182,16 @@ function theme.set_highlights(options)
 	hl(0, "@variable.parameter.bash", { fg = palette.light_orange })
 	hl(0, "@variable.parameter.python", { fg = palette.cyan2 })
 	hl(0, "@variable.vim", { link = "Variable" })
+	-- TypeScript/React specific
+	hl(0, "@variable.other.object.tsx", { fg = bg == "light" and palette.black or palette.parameter, bg = palette.none })
+	hl(0, "@variable.other.object.typescript", { fg = bg == "light" and palette.black or palette.parameter, bg = palette.none })
+	hl(0, "@variable.other.object.jsx", { fg = bg == "light" and palette.black or palette.parameter, bg = palette.none })
+	hl(0, "@variable.other.object.javascript", { fg = bg == "light" and palette.black or palette.parameter, bg = palette.none })
+	-- Additional React/TSX patterns
+	hl(0, "@support.class.component.tsx", { fg = bg == "light" and palette.component_tag or palette.orange, bg = palette.none })
+	hl(0, "@support.class.component.jsx", { fg = bg == "light" and palette.component_tag or palette.orange, bg = palette.none })
+	hl(0, "@entity.other.attribute-name", { fg = palette.green, bg = palette.none, italic = bg == "light" and false or options.italics })
+	hl(0, "@tag.component.tsx", { fg = bg == "light" and palette.component_tag or palette.orange, bg = palette.none, nocombine = true })
 
 	-- Whichkey
 
@@ -237,7 +259,7 @@ function theme.set_highlights(options)
 	hl(0, "StatusLineNC", { fg = palette.ui_border, bg = palette.quickfix_line })
 
 	-- WinBar
-	hl(0, "WinBarNC", { fg = palette.fg, bg = options.transparent_background and palette.none or palette.dark })
+	hl(0, "WinBarNC", { fg = palette.fg, bg = options.transparent and palette.none or palette.dark })
 	hl(0, "WinBar", { fg = palette.fg, bg = palette.none })
 
 	-- IndentBlankline
@@ -281,15 +303,15 @@ function theme.set_highlights(options)
 	hl(0, "RainbowDelimiterBlue", { fg = palette.blue15, bg = palette.none })
 
 	-- Snacks Plugin
-	hl(0, "SnacksPicker", { bg = options.transparent_background and palette.none or palette.bg })
-	hl(0, "SnacksPickerTitle", { fg = palette.fg, bg = options.transparent_background and palette.none or palette.bg })
+	hl(0, "SnacksPicker", { bg = options.transparent and palette.none or palette.bg })
+	hl(0, "SnacksPickerTitle", { fg = palette.fg, bg = options.transparent and palette.none or palette.bg })
 	hl(0, "SnacksPickerBorder", { fg = palette.none, bg = palette.none })
-	hl(0, "SnacksPickerNormal", { fg = palette.fg, bg = options.transparent_background and palette.none or palette.bg })
+	hl(0, "SnacksPickerNormal", { fg = palette.fg, bg = options.transparent and palette.none or palette.bg })
 	hl(0, "SnacksPickerMatch", { fg = palette.fg })
 	hl(0, "SnacksPickerCursor", { fg = palette.bg, bg = palette.bg })
 	hl(0, "SnacksPickerPrompt", { fg = palette.fg })
 	hl(0, "SnacksPickerDim", { fg = palette.gray3 })
-	hl(0, "SnacksInputIcon", { fg = palette.fg, bg = options.transparent_background and palette.none or palette.bg })
+	hl(0, "SnacksInputIcon", { fg = palette.fg, bg = options.transparent and palette.none or palette.bg })
 	hl(0, "SnacksIndent", { fg = palette.indent_guide, nocombine = true })
 	hl(0, "SnacksIndentChunk", { fg = palette.indent_guide_active, nocombine = true })
 	hl(0, "SnacksIndentScope", { fg = palette.indent_guide_active, nocombine = true })
@@ -298,22 +320,22 @@ function theme.set_highlights(options)
 	hl(
 		0,
 		"SnacksPickerInputTitle",
-		{ fg = palette.fg, bg = options.transparent_background and palette.none or palette.bg }
+		{ fg = palette.fg, bg = options.transparent and palette.none or palette.bg }
 	)
 	hl(
 		0,
 		"SnacksPickerBoxTitle",
-		{ fg = palette.fg, bg = options.transparent_background and palette.none or palette.bg }
+		{ fg = palette.fg, bg = options.transparent and palette.none or palette.bg }
 	)
 	hl(0, "SnacksPickerSelected", { fg = palette.bg })
 	hl(
 		0,
 		"SnacksPickerPickWinCurrent",
-		{ fg = palette.fg, bg = options.transparent_background and palette.none or palette.bg, bold = options.bold }
+		{ fg = palette.fg, bg = options.transparent and palette.none or palette.bg, bold = options.bold }
 	)
 	hl(0, "SnacksPickerPickWin", {
 		fg = palette.fg,
-		bg = options.transparent_background and palette.none or palette.search_blue,
+		bg = options.transparent and palette.none or palette.search_blue,
 		bold = options.bold,
 	})
 
